@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= lists %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+  <% for ({id, title, task1} of lists) { %>
+    <div class="col-md-6 mb-3">
+      <div class="card" data-id="<%= id %>">
+        <div class="card-body">
+          <h5 class="card-title"><%= title %></h5>
+          <p class="card-text"><%= task1 %></p>
+          <a href="/notes/<%= id %>" class="btn btn-primary mr-4">More details</a>
+
+          <button type="button" class="btn btn-danger" data-edit="<%= id %>">Edit</button>
+          <button type="button" class="btn btn-warning" data-delete="<%= id %>">-</button>
+        </div>
+      </div>
+    </div>
+  <% } %>
+  </body>
+</html>
