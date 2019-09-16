@@ -1,8 +1,36 @@
 body {
-  padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+.active-menu{
+  display: flex;
+  justify-content: center;
+}
+
+.color{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: .5px solid #ededed;
+}
+.color-transp{
+  background-color: transparent;
+}
+.color-blue{
+  background-color: #ABDFFF;
+}
+.color-green{
+  background-color: #C0FFB7;
+}
+.color-yellow{
+  background-color: #fcff9d;
+}
+.color-violet{
+  background-color: #BAB2CC;
+}
+.color-red{
+  background-color: #ffb8b9;
 }

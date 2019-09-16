@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Создание заметки</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<div class="container">
+    <a href="/" class="btn btn-outline-secondary mt-4">Вернуться</a>
+    <div class="row justify-content-center">
+        <div class="col-md-8 mt-4">
+            <h3 class="text-center">Создать заметку:</h3>
+            <form id="create-form">
+                <div class="form-group">
+                    <label>Название</label>
+                    <input type="text" class="form-control" name="title" placeholder="Введите заголовок">
+                </div>
+                <div class="form-group">
+                    <label>Текст заметки</label>
+                    <textarea type="text" name="text" class="form-control" required placeholder="Заметка..."></textarea>
+                </div>
+                <div class="form-group d-flex align-items-center">
+                    <input type="text" hidden data-color="transparent" name="color" class="note-bg-color" value="transparent">
+                    <div class="btn-group">
+                        <button id="color-picker" type="button" class="btn btn-light dropdown-toggle color-picker" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Выберите цвет заметки <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSIjMDAwIj4KICA8cGF0aCBkPSJNMTIgMjJDNi40OSAyMiAyIDE3LjUxIDIgMTJTNi40OSAyIDEyIDJzMTAgNC4wNCAxMCA5YzAgMy4zMS0yLjY5IDYtNiA2aC0xLjc3Yy0uMjggMC0uNS4yMi0uNS41IDAgLjEyLjA1LjIzLjEzLjMzLjQxLjQ3LjY0IDEuMDYuNjQgMS42N0EyLjUgMi41IDAgMCAxIDEyIDIyem0wLTE4Yy00LjQxIDAtOCAzLjU5LTggOHMzLjU5IDggOCA4Yy4yOCAwIC41LS4yMi41LS41YS41NC41NCAwIDAgMC0uMTQtLjM1Yy0uNDEtLjQ2LS42My0xLjA1LS42My0xLjY1YTIuNSAyLjUgMCAwIDEgMi41LTIuNUgxNmMyLjIxIDAgNC0xLjc5IDQtNCAwLTMuODYtMy41OS03LTgtN3oiLz48Y2lyY2xlIGN4PSI2LjUiIGN5PSIxMS41IiByPSIxLjUiLz4KICA8Y2lyY2xlIGN4PSI5LjUiIGN5PSI3LjUiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjE0LjUiIGN5PSI3LjUiIHI9IjEuNSIvPjxjaXJjbGUgY3g9IjE3LjUiIGN5PSIxMS41IiByPSIxLjUiLz4KPC9zdmc+Cg==" alt="Выбрать цвет заметки">
+                        </button>
+                        <div class="picked-color color ml-1"></div>
+                        <ul class="dropdown-menu color-menu pl-2 pr-2" id="color-menu">
+                            <li class="dropdown-item p-0 mr-2 color color-transp" data-color="transparent"></li>
+                            <li class="dropdown-item p-0 mr-2 color color-blue" data-color="#ABDFFF"></li>
+                            <li class="dropdown-item p-0 mr-2 color color-green" data-color="#C0FFB7"></li>
+                            <li class="dropdown-item p-0 mr-2 color color-red" data-color="#ffb8b9"></li>
+                            <li class="dropdown-item p-0 mr-2 color color-violet" data-color="#BAB2CC"></li>
+                            <li class="dropdown-item p-0 color color-yellow" data-color="#fcff9d"></li>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="text-center">
+
+                    <button type="submit" class="btn btn-outline-info">Создать</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<script src="/javascripts/create-note.js"></script>
+</body>
+</html>
