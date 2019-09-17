@@ -65,6 +65,7 @@ router.put('/api/notes/:id', async(req,res,next)=>{
 //delete note
 router.delete('/api/notes/:id', async(req, res, next) => {
     const id = req.params.id;
+    console.log(' req.params.id',id);
 
     const data = await collection.deleteOne({id: +id});
     res.json(JSON.stringify({

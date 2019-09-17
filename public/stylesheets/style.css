@@ -32,7 +32,7 @@ body {
   font-size: 15px;
 }
 
-.card-text {
+.excerpt {
   max-height:50px;
   overflow: hidden;
   white-space: nowrap;
