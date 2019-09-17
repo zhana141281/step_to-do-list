@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Создание заметки</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<div class="container" id="single-note-page">
+    <a href="/" class="btn btn-secondary">Вернуться</a>
+    <div class="col-md-6 offset-md-3 mt-5">
+
+        <div class="card" data-id="<%= note.id%>">
+            <div class="card-body">
+                <h5 class="card-title"><%= note.title%></h5>
+                <p class="card-text"><%= note.text%></p>
+                <button class="btn btn-warning" data-edit="<%= note.id%>" >Edit</button>
+                <button class="btn btn-danger" data-delete="<%= note.id%>">-</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
