@@ -1,8 +1,32 @@
-body {
-  padding: 50px;
+.container {
+  min-width: 320px;
+}
+.main {
+  width: 100%;
+  padding: 5%;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00B7FF;
+
+.todo-title {
+  font-size:45px;
+  font-weight: bold;
+  width: 100%;
+  font-family: 'Dancing Script', cursive;
+  color: #17a2b8;
+}
+
+.card {
+  border: 1px solid  #440f53;
+}
+
+.btn-note {
+  border: 1px solid  #440f53;
+  padding: 10px 20px;
+  font-size: 25px;
+}
+.btn-list {
+  color: #440f53;
+  padding: 10px 20px;
+  font-size: 25px;
 }

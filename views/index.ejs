@@ -1,23 +1,43 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= lists %></title>
+    <title>Home page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet">
   </head>
   <body>
-  <% for ({id, title, task1} of lists) { %>
-    <div class="col-md-6 mb-3">
-      <div class="card" data-id="<%= id %>">
-        <div class="card-body">
-          <h5 class="card-title"><%= title %></h5>
-          <p class="card-text"><%= task1 %></p>
-          <a href="/notes/<%= id %>" class="btn btn-primary mr-4">More details</a>
-
-          <button type="button" class="btn btn-danger" data-edit="<%= id %>">Edit</button>
-          <button type="button" class="btn btn-warning" data-delete="<%= id %>">-</button>
-        </div>
+    <div class="container-fluid mt-4">
+  <div class="top row">
+      <div class="top-title col-5">
+        <p class="todo-title text-center">
+          Your To-Do list
+        </p>
+      </div>
+      <div class="top-buttons col-7 text-right pt-3">
+        <a href="/notes" class="btn  btn-outline-info btn-note mr-4">Add Note </a>
+        <a href="/lists" class="btn  btn-outline-info btn-list mr-4">Add List</a>
       </div>
     </div>
-  <% } %>
+
+  </div>
+  <div class="container-fluid main">
+    <div class="row">
+      <% for ({title, id} of lists) { %>
+        <div class="col-6">
+          <div class="card  mb-3">
+            <div class="card-body">
+              <h5 class="card-title"><%= title %></h5>
+              <p class="card-text"><%= id %></p>
+              <a href="/notes/<%= id %>" class="btn  btn-outline-info p-6">More details</a>
+            </div>
+          </div>
+        </div>
+      <% } %>
+    </div>
+
+  </div>
+
   </body>
 </html>
