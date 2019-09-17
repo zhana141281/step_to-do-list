@@ -25,4 +25,23 @@ router.get('/',async function(req, res, next) {
   res.render('index', {lists});
 });
 
+router.get('/lists', (req, res, next) => {
+  res.render('lists');
+});
+
+//Create list
+router.post('/api/lists', async(req, res, next) => {
+  console.log(req.body);
+  const {id, title, text, type} = req.body;
+
+  const data = await collection.insertOne({id, title, text, type});
+  res.json(JSON.stringify({
+    status: !!data.insertedId
+  }))
+
+});
+
+
+
+
 module.exports = router;
