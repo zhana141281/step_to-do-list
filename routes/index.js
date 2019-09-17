@@ -35,8 +35,8 @@ router.get('/notes', (req, res)=>{
 //create note
 router.post('/api/notes', async (req, res, next)=> {
     console.log('req.body', req.body);
-    const {id, title, text, color} = req.body;
-    const data = await collection.insertOne({id, title, text, color});
+    const {id, title, text, color, type} = req.body;
+    const data = await collection.insertOne({id, title, text, color, type});
     res.json(JSON.stringify({
         status: !!data.insertedId
     }))
@@ -49,4 +49,27 @@ router.get('/notes/:id', async (req, res, next)=> {
     res.render('note', { note });
 });
 
+//edit note page
+router.put('/api/notes/:id', async(req,res,next)=>{
+    const id = +req.params.id;
+    const {title, text, color, type} = req.body;
+    const data = await collection.updateOne(
+        {id: +id},
+        {$set: {title, text, color, type}}
+    );
+    res.json(JSON.stringify({
+        status: !!data.modifiedCount
+    }))
+
+});
+//delete note
+router.delete('/api/notes/:id', async(req, res, next) => {
+    const id = req.params.id;
+
+    const data = await collection.deleteOne({id: +id});
+    res.json(JSON.stringify({
+        status: !!data.deletedCount
+    }))
+
+});
 module.exports = router;
