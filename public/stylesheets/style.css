@@ -2,12 +2,12 @@
   min-width: 320px;
 }
 .main {
-  width: 100%;
-  padding: 5%;
+    width: 100%;
+    padding: 5%;
+}
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
-
 
 .todo-title {
   font-size:45px;
@@ -20,7 +20,9 @@ body {
 .card {
   border: 1px solid  #440f53;
 }
-
+.card.card-details{
+    border: none;
+}
 .btn-note {
   border: 1px solid  #440f53;
   padding: 10px 20px;
@@ -60,3 +62,4 @@ body {
 .color-red{
   background-color: #ffb8b9;
 }
+
