@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Создание заметки</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<div class="container" id="single-note-page">
+    <a href="/" class="btn btn-outline-secondary mt-5">Вернуться</a>
+    <div class="col-md-6 offset-md-3 mt-5">
+
+        <div class="card card-details" data-id="<%= note.id%>" style="background-color: <%= note.color%>">
+            <div class="card-body">
+                <h5 class="card-title text-center"><%= note.title%></h5>
+                <p class="card-text"><%= note.text%></p>
+                <div class="d-flex justify-content-center">
+                    <button class="btn btn-outline-warning bg-white mr-3" data-edit="<%= note.id%>" >Редактировать заметку</button>
+                    <button class="btn btn-outline-danger bg-white" data-delete="<%= note.id%>">Удалить</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

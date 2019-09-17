@@ -27,4 +27,26 @@ router.get('/',async function(req, res, next) {
   res.render('index', {lists});
 });
 
+/*Note creation route*/
+router.get('/notes', (req, res)=>{
+    res.render('create-note')
+});
+
+//create note
+router.post('/api/notes', async (req, res, next)=> {
+    console.log('req.body', req.body);
+    const {id, title, text, color} = req.body;
+    const data = await collection.insertOne({id, title, text, color});
+    res.json(JSON.stringify({
+        status: !!data.insertedId
+    }))
+});
+
+//note details page
+router.get('/notes/:id', async (req, res, next)=> {
+    const id = +req.params.id;
+    const note = await collection.findOne({id});
+    res.render('note', { note });
+});
+
 module.exports = router;
