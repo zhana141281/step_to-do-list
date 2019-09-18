@@ -1,6 +1,6 @@
-const createNewInputButton = document.querySelector('.create-new-input');
-if (createNewInputButton) {
-    createNewInputButton.addEventListener('click', function () {
+const createNewInput = document.querySelector('.create-new-input');
+if (createNewInput) {
+    createNewInput.addEventListener('click', function () {
         let createdInput = document.createElement('div');
         let inner = `<div class="form-group">
                     <label>Дело:</label>
@@ -46,6 +46,7 @@ function collectFormData(element){
     let data = {};
     element.querySelectorAll('input').forEach(field=>{
         data[field.name] = field.value
+        console.log(data);
     });
     return data;
 }
@@ -76,6 +77,11 @@ function listCreatedHandler () {
     window.location = '/'
 }
 
+function incrementID (el){
+    let idCount = 0;
+    el.setAttribute('id','task'+ idCount);
+    idCount++;
 
+}
 
 

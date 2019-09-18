@@ -32,13 +32,20 @@ router.get('/lists', (req, res, next) => {
 //Create list
 router.post('/api/lists', async(req, res, next) => {
   console.log(req.body);
-  const {id, title, text, type} = req.body;
+  const {id, title, task, type} = req.body;
 
-  const data = await collection.insertOne({id, title, text, type});
+  const data = await collection.insertOne({id, title, task, type});
   res.json(JSON.stringify({
     status: !!data.insertedId
   }))
 
+});
+
+// Render single list
+router.get('/:id', async(req, res, next) => {
+    const id = +req.params.id;
+    const list = await collection.findOne({id});
+    res.render('list', { list });
 });
 
 
