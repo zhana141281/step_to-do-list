@@ -102,3 +102,13 @@ body {
     padding: 20px 25px;
     z-index: 10;
 }
+
+.ml15 {
+  margin-left: 15px;
+}
+.delete-input{
+  margin-left: 10px;
+  height: calc(1.5em + .5rem);
+  padding-top: -5px;
+  line-height: 0;
+}
