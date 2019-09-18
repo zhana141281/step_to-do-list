@@ -27,9 +27,9 @@
   <div class="container-fluid main">
     <div class="row">
 
-      <% for ({title, id, type, text, color} of lists) { %>
+      <% for ({title, id, type, text, color, lists:lists} of lists) { %>
+            <% if (type =='note') {%>
         <div class="col">
-            <% if (type ='note') {%>
                 <div class="card  mb-2">
                     <div class="card-body p-3" style = 'background-color: <%= color%>'>
                         <h5 class="card-title"><%= title %></h5>
@@ -38,9 +38,18 @@
                     </div>
                 </div>
         </div>
-            <%}%>
+            <%} else {%>
+                    <div class="col">
+                        <div class="card  mb-2">
+                            <div class="card-body p-3" style = 'background-color: <%= color%>'>
+                                <h5 class="card-title"><%= title %></h5>
+                                <p class="card-text excerpt"><%= lists[0].task %></p>
+                                <a href="/lists/<%= id %>" class="btn  btn-outline-info p-6 bg-white">Детальнее</a>
+                            </div>
+                        </div>
+                    </div>
 
-      <% } %>
+        <% }} %>
     </div>
 
   </div>
