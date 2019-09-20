@@ -112,3 +112,12 @@ body {
   padding-top: -5px;
   line-height: 0;
 }
+
+.list-text {
+    color: dimgrey;
+    word-wrap: break-word;
+}
+
+#edit-block {
+    display: none;
+}

@@ -9,39 +9,48 @@
     <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet">
   </head>
   <body>
-    <div class="container-fluid mt-4">
+  <div class="container-fluid mt-4">
 
       <div class="top-title row">
-        <p class="todo-title text-center">
-          Your To-Do list
-        </p>
+          <p class="todo-title text-center">
+              Your To-Do list
+          </p>
       </div>
 
       <div class="top-buttons row text-center pt-3">
-        <a href="/notes" class="btn col btn-outline-info btn-note mr-1">&#10010 Заметка </a>
-        <a href="/lists" class="btn col  btn-outline-info btn-list mr-1"> &#10010 Список</a>
+          <a href="/notes" class="btn col btn-outline-info btn-note mr-1">&#10010 Заметка </a>
+          <a href="/lists" class="btn col  btn-outline-info btn-list mr-1"> &#10010 Список</a>
       </div>
 
 
   </div>
   <div class="container-fluid main">
-    <div class="row">
+      <div class="row">
 
-      <% for ({title, id, type, text, color} of lists) { %>
-        <div class="col">
-            <% if (type ='note') {%>
-                <div class="card  mb-2">
-                    <div class="card-body p-3" style = 'background-color: <%= color%>'>
-                        <h5 class="card-title"><%= title %></h5>
-                        <p class="card-text excerpt"><%= text %></p>
-                        <a href="/notes/<%= id %>" class="btn  btn-outline-info p-6 bg-white">Детальнее</a>
-                    </div>
-                </div>
-        </div>
-            <%}%>
+          <% for ({title, id, type, text, color} of lists) { %>
+              <% if (type =='note') {%>
+                  <div class="col">
+                      <div class="card  mb-2">
+                          <div class="card-body p-3" style = 'background-color: <%= color%>'>
+                              <h5 class="card-title"><%= title %></h5>
+                              <p class="card-text excerpt"><%= text %></p>
+                              <a href="/notes/<%= id %>" class="btn  btn-outline-info p-6 bg-white">Детальнее</a>
+                          </div>
+                      </div>
+                  </div>
+              <%} else {%>
+                  <div class="col">
+                      <div class="card  mb-2">
+                          <div class="card-body p-3" style = 'background-color: <%= color%>'>
+                              <h5 class="card-title"><%= title %></h5>
+                              <p class="card-text excerpt"><%= text %></p>
+                              <a href="/lists/<%= id %>" class="btn  btn-outline-info p-6 bg-white">Детальнее</a>
+                          </div>
+                      </div>
+                  </div>
 
-      <% } %>
-    </div>
+          <% }} %>
+      </div>
 
   </div>
 
