@@ -106,12 +106,14 @@ body {
 .ml15 {
   margin-left: 15px;
 }
-.delete-input{
-  margin-left: 10px;
+.delete-input,
+.check-input{
+  margin-left: 2px;
   height: calc(1.5em + .5rem);
   padding-top: -5px;
   line-height: 0;
 }
+
 
 .list-text {
     color: dimgrey;
@@ -120,4 +122,8 @@ body {
 
 #edit-block {
     display: none;
+}
+
+.input-checked {
+    text-decoration: line-through;
 }
