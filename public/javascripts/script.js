@@ -128,11 +128,9 @@ function addButtonsListener (editElement, deleteElement) {
 
 const editButton = document.querySelector('[data-edit]');
 const deleteButton = document.querySelector('[data-delete]');
-console.log(deleteButton);
 
-if(document.getElementById('single-list-block') || document.getElementById('edit-block')) {
-    addButtonsListener(editButton,deleteButton)
-}
+
+addButtonsListener(editButton,deleteButton);
 
 
 function editBtnHandler(id){
@@ -198,7 +196,7 @@ function editBtnHandler(id){
                     <h5 class="list-title mb-4 text-center">${data.title}</h5>
                         <div class="row list-container"></div>
                     <div class="d-flex justify-content-between">
-                        <button type="button" class="btn btn-outline-danger delete-button mt-3" data-delete="${data.id}">Удалить</button>
+                        <button type="button" class="btn btn-outline-danger delete-button ml-4 mt-3" data-delete="${data.id}">Удалить</button>
                     </div>
                 </div>
             </div>
@@ -215,10 +213,15 @@ function editBtnHandler(id){
                     listContainer.prepend(listLine);
                 }
             });
-            const newEditedButton = singleLIstBlock.querySelector('.edit-button');
             const newDeleteButton = singleLIstBlock.querySelector('.delete-button');
 
-            addButtonsListener(newEditedButton, newDeleteButton);
+            newDeleteButton.addEventListener('click', (e)=>{
+                customFetch(
+                    `/api/lists/${+e.target.dataset.delete}`,
+                    'DELETE'
+                );
+                window.location = '/'
+            })
         })
     }
 
