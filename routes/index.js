@@ -78,9 +78,9 @@ router.get('/lists', (req, res, next) => {
 //Create list
 router.post('/api/lists', async(req, res, next) => {
   console.log(req.body);
-  const {id, title, task, type} = req.body;
+  const {id, title, lists, type} = req.body;
 
-  const data = await collection.insertOne({id, title, task, type});
+  const data = await collection.insertOne({id, title, lists, type});
   res.json(JSON.stringify({
     status: !!data.insertedId
   }))
@@ -88,13 +88,38 @@ router.post('/api/lists', async(req, res, next) => {
 });
 
 // Render single list
-router.get('/:id', async(req, res, next) => {
+router.get('/lists/:id', async(req, res, next) => {
     const id = +req.params.id;
-    const list = await collection.findOne({id});
-    res.render('list', { list });
+    const toDos = await collection.findOne({id});
+    res.render('list', {toDos});
 });
 
+// *Delete list
+router.delete('/api/lists/:id', async(req, res, next) => {
+    const id = req.params.id;
 
+    const data = await collection.deleteOne({id: +id});
+    res.json(JSON.stringify({
+        status: !!data.deletedCount
+    }))
+
+});
+
+// Edit list
+router.put('/api/lists/:id', async(req, res, next) => {
+    const id = +req.params.id;
+    const {title, lists, type} = req.body;
+    console.log(req.body);
+    console.log(lists);
+    const data = await collection.updateOne(
+        {id: +id},
+        {$set: {title, lists, type}},
+    );
+    res.json(JSON.stringify({
+        status: !!data.modifiedCount
+    }))
+
+});
 
 
 module.exports = router;

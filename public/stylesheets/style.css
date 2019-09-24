@@ -23,8 +23,7 @@ body {
 }
 
 .card {
-    width: 100%;
-  border: 1px solid  #440f53;
+ border: 1px solid  #440f53;
  }
 
 .card-title {
@@ -107,9 +106,24 @@ body {
 .ml15 {
   margin-left: 15px;
 }
-.delete-input{
-  margin-left: 10px;
+.delete-input,
+.check-input{
+  margin-left: 2px;
   height: calc(1.5em + .5rem);
   padding-top: -5px;
   line-height: 0;
+}
+
+
+.list-text {
+    color: dimgrey;
+    word-wrap: break-word;
+}
+
+#edit-block {
+    display: none;
+}
+
+.checked {
+    text-decoration: line-through;
 }
