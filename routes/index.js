@@ -113,7 +113,7 @@ router.put('/api/lists/:id', async(req, res, next) => {
     console.log(lists);
     const data = await collection.updateOne(
         {id: +id},
-        {$set: {title, lists, type}}
+        {$set: {title, lists, type}},
     );
     res.json(JSON.stringify({
         status: !!data.modifiedCount

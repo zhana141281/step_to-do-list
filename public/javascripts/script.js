@@ -20,7 +20,6 @@ if(createdListForm) {
     createdListForm.addEventListener('click', function (e) {
         if (e.target.classList.contains('delete-input')) {
             e.target.closest('.form-group').remove();
-            console.log(e.target.closest('.form-group'));
         }
     });
 }
@@ -29,8 +28,8 @@ if (document.querySelector('#create-list')) {
     document.querySelector('#create-list').addEventListener('submit', function (e) {
             e.preventDefault();
             taskCounter = 0;
-            console.log(e.target);
             let data = collectFormData(this);
+
             customFetch('/api/lists',
                 'POST',
                 {
@@ -49,19 +48,28 @@ function collectFormData(element){
     element.querySelectorAll('input[name^=task]').forEach(field=>{
         let itemData = {
             checkedStatus: false,
-            dataCount: taskCounter++,
+            dataCount: taskCounter++
         };
+        if (field.classList.contains('checked')){
+            itemData.checkedStatus = true;
+        }
         itemData[field.name] = field.value;
-        itemArray.push(itemData);
-        console.log(itemData);
+        fillingArray(itemArray,itemData);
     });
     let data = {
         title: document.querySelector('input[name=title]').value,
         lists: itemArray,
         id: document.querySelector('[name=id]').value
     };
-    console.log(data);
     return data;
+}
+
+function fillingArray(arr,el){
+    if (el.checkedStatus){
+        arr.push(el)
+    } else {
+        arr.unshift(el)
+    }
 }
 
 async function customFetch(endpoint, method, body, callback) {
@@ -80,7 +88,8 @@ async function customFetch(endpoint, method, body, callback) {
     // console.log(answer, body);
 
     if(answer.status) {
-        callback(body)
+        callback
+        // window.location = `/`
     } else {
         alert('Something goes wrong! =(')
     }
@@ -90,8 +99,6 @@ if(document.getElementById('single-list-block') || document.getElementById('edit
 
     document.querySelector('[data-edit]').addEventListener('click', (e) => {
         editBtnHandler(e.target.dataset.edit)
-        console.log(e.target.dataset.edit);
-        console.log(e.target);
     });
 
     document.querySelector('[data-delete]').addEventListener('click', (e) => {
@@ -117,21 +124,20 @@ function editBtnHandler(id){
         let taskCounterInput = inputList[inputList.length-1].dataset.count;
 
 
-
         document.querySelector('#edit-form').addEventListener('click',function (e) {
                 if (e.target.classList.contains('delete-input')) {
                     e.target.closest('.row').remove();
                     console.log(e.target.closest('.row'));
                 } else if (e.target.classList.contains('check-input')){
-                    console.log(e.target.dataset.count)
-                    checkButtonHandler(e.target.dataset.count)
+                   e.target.previousElementSibling.classList.add('checked');
+                   console.log(e.target.previousElementSibling)
                 } else if (e.target.classList.contains('new-input-for-edit')){
                     e.preventDefault();
                     let createdInput = document.createElement('div');
                     let inner = `<div class="form-group">
                     <div class="row">
-                    <input class="form-control form-control-sm col-8 ml15 input" type="text" name="task" data-count="${taskCounterInput++}" required>
-                    <button type="button" data-count="${taskCounterInput++}" class="btn btn-outline-success col-1 check-input">V</button>
+                    <input class="form-control form-control-sm col-9 ml15 input" type="text" name="task" data-count="${taskCounterInput++}" required>
+                    <button type="button" class="btn btn-outline-success col-1 check-input">V</button>
                     <button type="button" class="btn btn-outline-secondary col-1 delete-input">-</button>
                     </div>
                 </div>`;
@@ -147,13 +153,14 @@ function editBtnHandler(id){
             e.preventDefault();
                     let data = collectFormData(changeBlock);
                     console.log(data);
+
                     customFetch(`/api/lists/${data.id}`,
                         'PUT',
                         {
                             ...data,
-                            type: 'list'
+                            type: 'list',
                         },
-                        window.location = `/lists/${data.id}`
+                        // window.location = `/lists/${data.id}`
                     );
             changeBlock.style.display = 'none';
             singleLIstBlock.style.display = 'block';
@@ -178,15 +185,20 @@ function editBtnHandler(id){
                 let listLine = document.createElement('p');
                 listLine.className ='list-text col-11';
                 listLine.innerText = el.task;
-                listContainer.append(listLine);
+                if (el.checkedStatus){
+                    listLine.classList.add('checked');
+                    listContainer.append(listLine)
+                } else {
+                    listContainer.prepend(listLine);
+                }
             });
         })
     }
 
 
-function checkButtonHandler (counter){
-    let input = document.querySelector(`input[data-count="${counter}"]`);
-    input.classList.add('input-checked');
-
-}
+// function checkButtonHandler (counter){
+//     let input = document.querySelector(`input[data-count="${counter}"]`);
+//     input.classList.add('input-checked');
+// console.log(input)
+// }
 
