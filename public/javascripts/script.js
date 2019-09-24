@@ -129,7 +129,6 @@ function addButtonsListener (editElement, deleteElement) {
 const editButton = document.querySelector('[data-edit]');
 const deleteButton = document.querySelector('[data-delete]');
 
-
 addButtonsListener(editButton,deleteButton);
 
 
@@ -225,9 +224,3 @@ function editBtnHandler(id){
         })
     }
 
-
-// function checkButtonHandler (counter){
-//     let input = document.querySelector(`input[data-count="${counter}"]`);
-//     input.classList.add('input-checked');
-// console.log(input)
-// }
