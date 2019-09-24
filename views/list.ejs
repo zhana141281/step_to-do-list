@@ -54,14 +54,21 @@
                         <input type="hidden" name="id" class="form-control" value="<%= toDos.id%>">
                     </div>
                         <% for ({task, dataCount, checkedStatus} of toDos.lists) { %>
+                        <% if (checkedStatus === true){ %>
                     <div id="edit-form">
                         <div class="form-group">
                             <div class="row">
-                                <input class="form-control form-control-sm col-9 ml15 input" type="text" name="task" value="<%= task%>" data-id="<%= dataCount%>" required>
-                                <button type="button" class="btn btn-outline-success col-1 check-input">V</button>
-                                <button type="button" class="btn btn-outline-secondary col-1 delete-input">-</button>
-                            </div>
-                        </div>
+                                <input class="form-control form-control-sm col-9 ml15 input checked" type="text" name="task" value="<%= task%>" data-id="<%= dataCount%>" required>
+                                <% }else{ %>
+                                <div id="edit-form">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <input class="form-control form-control-sm col-9 ml15 input" type="text" name="task" value="<%= task%>" data-id="<%= dataCount%>" required>
+                                            <% } %>
+                                            <button type="button" class="btn btn-outline-success col-1 check-input">V</button>
+                                            <button type="button" class="btn btn-outline-secondary col-1 delete-input">-</button>
+                                        </div>
+                                    </div>
                             <% } %>
                         <div class="text-left mb-3 after-input">
                             <button type="button" class="btn btn-light new-input-for-edit">+</button>

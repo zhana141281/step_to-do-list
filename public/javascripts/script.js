@@ -50,11 +50,8 @@ function collectFormData(element){
             checkedStatus: false,
             dataCount: taskCounter++
         };
-        if (field.classList.contains('checked')){
-            itemData.checkedStatus = true;
-        }
         itemData[field.name] = field.value;
-        fillingArray(itemArray,itemData);
+        itemArray.push(itemData);
     });
     let data = {
         title: document.querySelector('input[name=title]').value,
@@ -62,6 +59,27 @@ function collectFormData(element){
         id: document.querySelector('[name=id]').value
     };
     return data;
+}
+
+function collectEditedData(element){
+    let editedArray = [];
+    element.querySelectorAll('input[name^=task]').forEach(field=>{
+        let itemData = {
+            checkedStatus: false,
+            dataCount: taskCounter++
+        };
+        if (field.classList.contains('checked')){
+            itemData.checkedStatus = true;
+        }
+        itemData[field.name] = field.value;
+        fillingArray(editedArray,itemData);
+    });
+    let editedData = {
+        title: document.querySelector('input[name=title]').value,
+        lists: editedArray,
+        id: document.querySelector('[name=id]').value
+    };
+    return editedData;
 }
 
 function fillingArray(arr,el){
@@ -94,21 +112,26 @@ async function customFetch(endpoint, method, body, callback) {
         alert('Something goes wrong! =(')
     }
 }
-
-if(document.getElementById('single-list-block') || document.getElementById('edit-block')) {
-
-    document.querySelector('[data-edit]').addEventListener('click', (e) => {
+function addButtonsListener (editElement, deleteElement) {
+    editElement.addEventListener('click', (e) => {
         editBtnHandler(e.target.dataset.edit)
+        console.log(e.target.dataset.edit)
     });
-
-    document.querySelector('[data-delete]').addEventListener('click', (e) => {
+    deleteElement.addEventListener('click', (e) => {
         customFetch(
             `/api/lists/${+e.target.dataset.delete}`,
             'DELETE'
         );
         window.location = '/'
     })
+}
 
+const editButton = document.querySelector('[data-edit]');
+const deleteButton = document.querySelector('[data-delete]');
+console.log(deleteButton);
+
+if(document.getElementById('single-list-block') || document.getElementById('edit-block')) {
+    addButtonsListener(editButton,deleteButton)
 }
 
 
@@ -129,7 +152,7 @@ function editBtnHandler(id){
                     e.target.closest('.row').remove();
                     console.log(e.target.closest('.row'));
                 } else if (e.target.classList.contains('check-input')){
-                   e.target.previousElementSibling.classList.add('checked');
+                   e.target.previousElementSibling.classList.toggle('checked');
                    console.log(e.target.previousElementSibling)
                 } else if (e.target.classList.contains('new-input-for-edit')){
                     e.preventDefault();
@@ -151,7 +174,8 @@ function editBtnHandler(id){
 
         document.querySelector('#edit-list').addEventListener('submit',function (e) {
             e.preventDefault();
-                    let data = collectFormData(changeBlock);
+                    let data = collectEditedData(changeBlock);
+
                     console.log(data);
 
                     customFetch(`/api/lists/${data.id}`,
@@ -174,7 +198,6 @@ function editBtnHandler(id){
                     <h5 class="list-title mb-4 text-center">${data.title}</h5>
                         <div class="row list-container"></div>
                     <div class="d-flex justify-content-between">
-                        <button type="button" class="btn btn-outline-warning edit-button mt-3" data-edit="${data.id}">Редактировать</button>
                         <button type="button" class="btn btn-outline-danger delete-button mt-3" data-delete="${data.id}">Удалить</button>
                     </div>
                 </div>
@@ -192,6 +215,10 @@ function editBtnHandler(id){
                     listContainer.prepend(listLine);
                 }
             });
+            const newEditedButton = singleLIstBlock.querySelector('.edit-button');
+            const newDeleteButton = singleLIstBlock.querySelector('.delete-button');
+
+            addButtonsListener(newEditedButton, newDeleteButton);
         })
     }
 
@@ -201,4 +228,3 @@ function editBtnHandler(id){
 //     input.classList.add('input-checked');
 // console.log(input)
 // }
-
